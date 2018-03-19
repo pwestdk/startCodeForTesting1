@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: testex.DateFormatterTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.088 sec <<< FAILURE!
-testGetFormattedDate(testex.DateFormatterTest)  Time elapsed: 0.016 sec  <<< ERROR!
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.069 sec <<< FAILURE!
+testGetFormattedDate(testex.DateFormatterTest)  Time elapsed: 0.012 sec  <<< ERROR!
 testex.JokeException: Illegal Time Zone String
 	at testex.DateFormatter.getFormattedDate(DateFormatter.java:20)
 	at testex.DateFormatterTest.testGetFormattedDate(DateFormatterTest.java:49)
