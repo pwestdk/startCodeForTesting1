@@ -32,14 +32,14 @@ public class DateFormatter {
    */
   public static void main(String[] args) throws JokeException  {
     
-    for (String str : TimeZone.getAvailableIDs()) {
-      System.out.println(str);
-    }
+    //for (String str : TimeZone.getAvailableIDs()) {
+    //  System.out.println(str);
+   // }
     
     //Executing our public method with a valid String:
-    System.out.println(new DateFormatter().getFormattedDate("Europe/Kiev", new Date()));
-    
-    System.out.println(new DateFormatter().getFormattedDate("ImNotLegal", new Date()));
+    //System.out.println(new DateFormatter().getFormattedDate("Europe/Kiev", new Date()));
+    System.out.println(getFormattedDate("Europe/Copenhagen", new Date()));
+    //System.out.println(new DateFormatter().getFormattedDate("ImNotLegal", new Date()));
     
     
     

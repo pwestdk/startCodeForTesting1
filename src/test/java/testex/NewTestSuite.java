@@ -11,12 +11,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import org.mockito.runners.MockitoJUnitRunner;
 
 /**
  *
  * @author pwc
  */
-@RunWith(Suite.class)
+@RunWith(MockitoJUnitRunner.class)
 @Suite.SuiteClasses({testex.JokeFetcherTest.class, testex.DateFormatterTest.class})
 public class NewTestSuite {
 

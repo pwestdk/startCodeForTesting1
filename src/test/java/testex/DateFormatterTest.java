@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.mockito.Mock;
 
 /**
  *
@@ -38,18 +39,12 @@ public class DateFormatterTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of getFormattedDate method, of class DateFormatter.
-     */
     @Test
     public void testGetFormattedDate() throws Exception {
-        System.out.println("getFormattedDate");
-        String timeZone = "";
-        String expResult = "";
-        String result = DateFormatter.getFormattedDate(timeZone, new Date());
+        String timeZone = "Europe/Copenhagen";
+        String expResult = "01 Jan 1970 01:00 AM";
+        String result = DateFormatter.getFormattedDate(timeZone, new Date(1));
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
     @Test(expected = JokeException.class)
