@@ -15,15 +15,14 @@ public class DateFormatter {
  * time zone
  * @throws JokeException If the timeZone string is not a valid string
  */
-  public static String getFormattedDate(String timeZone) throws JokeException  {
+  public static String getFormattedDate(String timeZone, Date d) throws JokeException  {
     if(!Arrays.asList(TimeZone.getAvailableIDs()).contains(timeZone)){
       throw new JokeException("Illegal Time Zone String");
     }
-    Date time = new Date();
     String dateTimeFormat = "dd MMM yyyy hh:mm aa";
     SimpleDateFormat simpleFormat = new SimpleDateFormat(dateTimeFormat);
     simpleFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
-    return simpleFormat.format(time); 
+    return simpleFormat.format(d); 
   }
 
   /**
@@ -38,9 +37,9 @@ public class DateFormatter {
     }
     
     //Executing our public method with a valid String:
-    System.out.println(new DateFormatter().getFormattedDate("Europe/Kiev"));
+    System.out.println(new DateFormatter().getFormattedDate("Europe/Kiev", new Date()));
     
-    System.out.println(new DateFormatter().getFormattedDate("ImNotLegal"));
+    System.out.println(new DateFormatter().getFormattedDate("ImNotLegal", new Date()));
     
     
     
