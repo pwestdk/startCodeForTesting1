@@ -41,16 +41,18 @@ public class DateFormatterTest {
 
     @Test
     public void testGetFormattedDate() throws Exception {
+        DateFormatter dateformatter = new DateFormatter();
         String timeZone = "Europe/Copenhagen";
         String expResult = "01 Jan 1970 01:00 AM";
-        String result = DateFormatter.getFormattedDate(timeZone, new Date(1));
+        String result = dateformatter.getFormattedDate(timeZone, new Date(1));
         assertEquals(expResult, result);
     }
     
     @Test(expected = JokeException.class)
     public void badFormattedString() throws JokeException{
+        DateFormatter dateformatter = new DateFormatter();
         String timeZone = "swag";
-        DateFormatter.getFormattedDate(timeZone, new Date());
+        dateformatter.getFormattedDate(timeZone, new Date());
     }
 
     

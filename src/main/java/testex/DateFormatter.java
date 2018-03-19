@@ -5,8 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class DateFormatter {
-
+public class DateFormatter implements IDateFormatter {
 /**
  * Returns a formatted string representing NOW, adjusted to the time zone string
  * passed in
@@ -15,7 +14,7 @@ public class DateFormatter {
  * time zone
  * @throws JokeException If the timeZone string is not a valid string
  */
-  public static String getFormattedDate(String timeZone, Date d) throws JokeException  {
+  public String getFormattedDate(String timeZone, Date d) throws JokeException  {
     if(!Arrays.asList(TimeZone.getAvailableIDs()).contains(timeZone)){
       throw new JokeException("Illegal Time Zone String");
     }
@@ -38,7 +37,7 @@ public class DateFormatter {
     
     //Executing our public method with a valid String:
     //System.out.println(new DateFormatter().getFormattedDate("Europe/Kiev", new Date()));
-    System.out.println(getFormattedDate("Europe/Copenhagen", new Date()));
+    //System.out.println(getFormattedDate("Europe/Copenhagen", new Date()));
     //System.out.println(new DateFormatter().getFormattedDate("ImNotLegal", new Date()));
     
     
