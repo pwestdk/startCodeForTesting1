@@ -1,8 +1,5 @@
 package testex;
 
-/**
- * Encapsulates a single Joke and it's origin
- */
 public class Joke {
    private final String joke;
    private final String reference;

@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
@@ -28,30 +24,12 @@ public class JokeFetcherTest {
 
     @Mock
     IFetcherFactory mockFactory;
-    
-    public JokeFetcherTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
 
     @Test
     public void testGetAvailableTypes() {
-
-        JokeFetcher fetcher = new JokeFetcher(new FetcherFactory(), new DateFormatter());
+        JokeFetcher fetcher = new JokeFetcher(mockFactory, mockDateFormatter);
+        ArrayList<String> types = new ArrayList<String>(Arrays.asList("eduprog", "chucknorris", "moma", "tambal"));
+        when(mockFactory.getAvailableTypes()).thenReturn(types);
         List<String> expResult = Arrays.asList("eduprog", "chucknorris", "moma", "tambal");
         List<String> result = fetcher.getAvailableTypes();
         assertEquals(expResult, result);
@@ -59,8 +37,10 @@ public class JokeFetcherTest {
 
     @Test
     public void testIsStringValid() {
+        JokeFetcher fetcher = new JokeFetcher(mockFactory, mockDateFormatter);
+        ArrayList<String> types = new ArrayList<String>(Arrays.asList("eduprog", "chucknorris", "moma", "tambal"));
+        when(mockFactory.getAvailableTypes()).thenReturn(types);
         String jokeTokens = "moma";
-        JokeFetcher fetcher = new JokeFetcher(new FetcherFactory(), new DateFormatter());
         boolean expResult = true;
         boolean result = fetcher.isStringValid(jokeTokens);
         assertEquals(expResult, result);
@@ -68,27 +48,29 @@ public class JokeFetcherTest {
 
     @Test
     public void testIsStringValidNotInTypes() {
+        JokeFetcher fetcher = new JokeFetcher(mockFactory, mockDateFormatter);
+        ArrayList<String> types = new ArrayList<String>(Arrays.asList("eduprog", "chucknorris", "moma", "tambal"));
+        when(mockFactory.getAvailableTypes()).thenReturn(types);
         String jokeTokens = "test";
-        JokeFetcher fetcher = new JokeFetcher(new FetcherFactory(), new DateFormatter());
         boolean expResult = false;
         boolean result = fetcher.isStringValid(jokeTokens);
         assertEquals(expResult, result);
     }
-    
+
     @Test(expected = JokeException.class)
     public void testGetInvalidJoke() throws JokeException {
-        JokeFetcher jf = new JokeFetcher(new FetcherFactory(), new DateFormatter());
+        JokeFetcher fetcher = new JokeFetcher(mockFactory, mockDateFormatter);
         String jokesToFetch = "swag2";
         String timeZone = "Europe/Copenhagen";
-        jf.getJokes(jokesToFetch, timeZone);
+        fetcher.getJokes(jokesToFetch, timeZone);
     }
-    
+
     @Test
     public void testGetJokes() throws JokeException {
         String jokeType = "moma";
         List<String> types = new ArrayList<String>();
         types.add(jokeType);
-        Joke joke = new Joke("Yo mama so fat, she can't even fit in this test-case","www.fakeApi.com");
+        Joke joke = new Joke("Yo mama so fat, she can't even fit in this test-case", "www.fakeApi.com");
         IJokeFetcher momaFetcher = Mockito.mock(IJokeFetcher.class);
         ArrayList<IJokeFetcher> fetchers = new ArrayList<>();
         fetchers.add(momaFetcher);
@@ -100,12 +82,6 @@ public class JokeFetcherTest {
         String expResult = "Joke{joke=Yo mama so fat, she can't even fit in this test-case, reference=www.fakeApi.com}";
         JokeFetcher jf = new JokeFetcher(mockFactory, mockDateFormatter);
         Jokes jokes = jf.getJokes(jokeType, timeZone);
-        assertEquals(expResult, jokes.getJokes().get(0));
+        assertEquals(expResult, jokes.getJokes().get(0).toString());
     }
-    
-//    @Test
-//    public void testFetcherFactory() {
-//        
-//    }
-
 }
