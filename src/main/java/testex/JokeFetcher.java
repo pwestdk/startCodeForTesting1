@@ -1,12 +1,8 @@
 package testex;
 
-import static com.jayway.restassured.RestAssured.given;
-import com.jayway.restassured.response.ExtractableResponse;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import testex.fetchers.FetcherFactory;
 import testex.fetchers.IFetcherFactory;
 import testex.fetchers.IJokeFetcher;
 
