@@ -4,8 +4,6 @@ import java.util.Date;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import static org.mockito.Mockito.when;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
