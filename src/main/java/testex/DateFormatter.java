@@ -7,12 +7,6 @@ import java.util.TimeZone;
 
 public class DateFormatter implements IDateFormatter {
     
-    private IDateFormatter formatter;
-
-    public DateFormatter(IDateFormatter formatter) {
-        this.formatter = formatter;
-    }
-    
   public String getFormattedDate(String timeZone, Date d) throws JokeException  {
     if(!Arrays.asList(TimeZone.getAvailableIDs()).contains(timeZone)){
       throw new JokeException("Illegal Time Zone String");
