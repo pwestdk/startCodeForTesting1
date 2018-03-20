@@ -29,24 +29,17 @@ public class JokeFetcherTest {
     @Mock
     IFetcherFactory mockFactory;
     
+    @Mock
+    IJokeFetcher MomaFetcher, EduJokeFetcher,ChuckNorrisFetcher,TambalFetcher;
+    
     public JokeFetcherTest() {
     }
 
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
 
     @Before
     public void setUp() {
     }
 
-    @After
-    public void tearDown() {
-    }
 
     @Test
     public void testGetAvailableTypes() {
@@ -84,24 +77,50 @@ public class JokeFetcherTest {
     }
     
     @Test
-    public void testGetJokes() throws JokeException {
+    public void testGetOneJoke() throws JokeException {
         String jokeType = "moma";
         List<String> types = new ArrayList<String>();
         types.add(jokeType);
         Joke joke = new Joke("Yo mama so fat, she can't even fit in this test-case","www.fakeApi.com");
-        IJokeFetcher momaFetcher = Mockito.mock(IJokeFetcher.class);
         ArrayList<IJokeFetcher> fetchers = new ArrayList<>();
-        fetchers.add(momaFetcher);
+        fetchers.add(MomaFetcher);
         when(mockFactory.getFetchers(jokeType)).thenReturn(fetchers);
-        when(momaFetcher.getJoke()).thenReturn(joke);
+        when(MomaFetcher.getJoke()).thenReturn(joke);
         String timeZone = "Europe/Copenhagen";
         when(mockFactory.getAvailableTypes()).thenReturn(types);
         when(mockDateFormatter.getFormattedDate(timeZone, new Date())).thenReturn("");
         String expResult = "Joke{joke=Yo mama so fat, she can't even fit in this test-case, reference=www.fakeApi.com}";
-        JokeFetcher jf = new JokeFetcher(mockFactory, mockDateFormatter);
-        Jokes jokes = jf.getJokes(jokeType, timeZone);
-        assertEquals(expResult, jokes.getJokes().get(0));
+        JokeFetcher jokeFetcher = new JokeFetcher(mockFactory, mockDateFormatter);
+        Jokes jokes = jokeFetcher.getJokes(jokeType, timeZone);
+        assertEquals(expResult, jokes.getJokes().get(0).toString());
     }
+   
+    
+    @Test
+    public void getJokes()throws JokeException{
+           String jokeTypes = "eduprog,chucknorris,moma,tambal";
+           String timeZone = "Europe/Copenhagen";
+           ArrayList<IJokeFetcher> fetchers = new ArrayList<>();
+           fetchers.add(MomaFetcher);
+           fetchers.add(EduJokeFetcher);
+           fetchers.add(ChuckNorrisFetcher);
+           fetchers.add(TambalFetcher);
+           when(MomaFetcher.getJoke()).thenReturn(new Joke("Amazing Joke 1","www.fakeApi.com"));
+           when(EduJokeFetcher.getJoke()).thenReturn(new Joke("Amazing Joke 2","www.fakeApi.com"));
+           when(ChuckNorrisFetcher.getJoke()).thenReturn(new Joke("Amazing Joke 3","www.fakeApi.com"));
+           when(TambalFetcher.getJoke()).thenReturn(new Joke("Amazing Joke 4","www.fakeApi.com"));
+           when(mockFactory.getFetchers(jokeTypes)).thenReturn(fetchers);
+           when(mockDateFormatter.getFormattedDate(timeZone, new Date())).thenReturn("");
+           JokeFetcher jokeFetcher = new JokeFetcher(mockFactory, mockDateFormatter);
+           Jokes jokes = jokeFetcher.getJokes(jokeTypes, timeZone);
+           int tempCount = 1;
+           for(Joke j : jokes.getJokes()){
+               assertEquals("Amazing Joke " + tempCount, j.toString());
+               tempCount++;
+           }
+    }
+    
+
     
 //    @Test
 //    public void testFetcherFactory() {
