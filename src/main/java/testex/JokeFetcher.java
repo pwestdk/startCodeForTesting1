@@ -1,18 +1,11 @@
 package testex;
 
-import static com.jayway.restassured.RestAssured.given;
-import com.jayway.restassured.response.ExtractableResponse;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import testex.fetchers.FetcherFactory;
 import testex.fetchers.IFetcherFactory;
 import testex.fetchers.IJokeFetcher;
 
-/**
- * Class used to fetch jokes from a number of external joke API's
- */
 public class JokeFetcher {
 
     private IFetcherFactory factory;
@@ -52,11 +45,11 @@ public class JokeFetcher {
     }
 
     public static void main(String[] args) throws JokeException {
-        JokeFetcher jf = new JokeFetcher(new FetcherFactory(), new DateFormatter());
-        Jokes jokes = jf.getJokes("eduprog,chucknorris,chucknorris,moma,tambal", "Europe/Copenhagen");
-        jokes.getJokes().forEach((joke) -> {
-            System.out.println(joke);
-        });
-        System.out.println("Is String Valid: " + jf.isStringValid("edu_prog,xxx"));
+//        JokeFetcher jf = new JokeFetcher(new FetcherFactory(), new DateFormatter());
+//        Jokes jokes = jf.getJokes("eduprog,chucknorris,chucknorris,moma,tambal", "Europe/Copenhagen");
+//        jokes.getJokes().forEach((joke) -> {
+//            System.out.println(joke);
+//        });
+//        System.out.println("Is String Valid: " + jf.isStringValid("edu_prog,xxx"));
     }
 }

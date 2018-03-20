@@ -1,50 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package testex;
 
 import java.util.Date;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import static org.mockito.Mockito.when;
+import org.mockito.runners.MockitoJUnitRunner;
 
-/**
- *
- * @author pwc
- */
+@RunWith(MockitoJUnitRunner.class)
 public class DateFormatterTest {
-    
-    public DateFormatterTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
+
 
     @Test
     public void testGetFormattedDate() throws Exception {
         DateFormatter dateformatter = new DateFormatter();
         String timeZone = "Europe/Copenhagen";
+        Date d = new Date(1);
+ //       when(mockDateFormatter.getFormattedDate(timeZone, d)).thenReturn("01 Jan 1970 01:00 AM");
         String expResult = "01 Jan 1970 01:00 AM";
-        String result = dateformatter.getFormattedDate(timeZone, new Date(1));
+        String result = dateformatter.getFormattedDate(timeZone, d);
         assertEquals(expResult, result);
     }
     
@@ -54,6 +29,4 @@ public class DateFormatterTest {
         String timeZone = "swag";
         dateformatter.getFormattedDate(timeZone, new Date());
     }
-
-    
 }

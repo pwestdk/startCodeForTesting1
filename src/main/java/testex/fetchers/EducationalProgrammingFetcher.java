@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package testex.fetchers;
 
 import static com.jayway.restassured.RestAssured.given;
 import com.jayway.restassured.response.ExtractableResponse;
 import testex.Joke;
 
-/**
- *
- * @author Kasper
- */
 public class EducationalProgrammingFetcher implements IJokeFetcher {
 
     @Override

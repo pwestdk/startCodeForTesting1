@@ -3,10 +3,6 @@ package testex;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Encapsulates a number of Joke's and a string value containing a time zone adjusted string indicating
- * when the jokes was fetched
- */
 public class Jokes {
 
   List<Joke> jokes = new ArrayList();

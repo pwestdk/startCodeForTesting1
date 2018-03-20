@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
@@ -28,23 +24,15 @@ public class JokeFetcherTest {
 
     @Mock
     IFetcherFactory mockFactory;
-    
+
     @Mock
     IJokeFetcher MomaFetcher, EduJokeFetcher,ChuckNorrisFetcher,TambalFetcher;
     
-    public JokeFetcherTest() {
-    }
-
-
-    @Before
-    public void setUp() {
-    }
-
-
     @Test
     public void testGetAvailableTypes() {
-
-        JokeFetcher fetcher = new JokeFetcher(new FetcherFactory(), new DateFormatter());
+        JokeFetcher fetcher = new JokeFetcher(mockFactory, mockDateFormatter);
+        ArrayList<String> types = new ArrayList<String>(Arrays.asList("eduprog", "chucknorris", "moma", "tambal"));
+        when(mockFactory.getAvailableTypes()).thenReturn(types);
         List<String> expResult = Arrays.asList("eduprog", "chucknorris", "moma", "tambal");
         List<String> result = fetcher.getAvailableTypes();
         assertEquals(expResult, result);
@@ -52,8 +40,10 @@ public class JokeFetcherTest {
 
     @Test
     public void testIsStringValid() {
+        JokeFetcher fetcher = new JokeFetcher(mockFactory, mockDateFormatter);
+        ArrayList<String> types = new ArrayList<String>(Arrays.asList("eduprog", "chucknorris", "moma", "tambal"));
+        when(mockFactory.getAvailableTypes()).thenReturn(types);
         String jokeTokens = "moma";
-        JokeFetcher fetcher = new JokeFetcher(new FetcherFactory(), new DateFormatter());
         boolean expResult = true;
         boolean result = fetcher.isStringValid(jokeTokens);
         assertEquals(expResult, result);
@@ -61,21 +51,23 @@ public class JokeFetcherTest {
 
     @Test
     public void testIsStringValidNotInTypes() {
+        JokeFetcher fetcher = new JokeFetcher(mockFactory, mockDateFormatter);
+        ArrayList<String> types = new ArrayList<String>(Arrays.asList("eduprog", "chucknorris", "moma", "tambal"));
+        when(mockFactory.getAvailableTypes()).thenReturn(types);
         String jokeTokens = "test";
-        JokeFetcher fetcher = new JokeFetcher(new FetcherFactory(), new DateFormatter());
         boolean expResult = false;
         boolean result = fetcher.isStringValid(jokeTokens);
         assertEquals(expResult, result);
     }
-    
+
     @Test(expected = JokeException.class)
     public void testGetInvalidJoke() throws JokeException {
-        JokeFetcher jf = new JokeFetcher(new FetcherFactory(), new DateFormatter());
+        JokeFetcher fetcher = new JokeFetcher(mockFactory, mockDateFormatter);
         String jokesToFetch = "swag2";
         String timeZone = "Europe/Copenhagen";
-        jf.getJokes(jokesToFetch, timeZone);
+        fetcher.getJokes(jokesToFetch, timeZone);
     }
-    
+
     @Test
     public void testGetOneJoke() throws JokeException {
         String jokeType = "moma";
@@ -94,7 +86,6 @@ public class JokeFetcherTest {
         Jokes jokes = jokeFetcher.getJokes(jokeType, timeZone);
         assertEquals(expResult, jokes.getJokes().get(0).toString());
     }
-   
     
     @Test
     public void getJokes()throws JokeException{
@@ -120,12 +111,4 @@ public class JokeFetcherTest {
                tempCount++;
            }
     }
-    
-
-    
-//    @Test
-//    public void testFetcherFactory() {
-//        
-//    }
-
 }
