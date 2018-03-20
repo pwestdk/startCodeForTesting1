@@ -101,12 +101,13 @@ public class JokeFetcherTest {
            when(ChuckNorrisFetcher.getJoke()).thenReturn(new Joke("Amazing Joke 3","www.fakeApi.com"));
            when(TambalFetcher.getJoke()).thenReturn(new Joke("Amazing Joke 4","www.fakeApi.com"));
            when(mockFactory.getFetchers(jokeTypes)).thenReturn(fetchers);
+           when(mockFactory.getAvailableTypes()).thenReturn(Arrays.asList(jokeTypes.split(",")));
            when(mockDateFormatter.getFormattedDate(timeZone, new Date())).thenReturn("");
            JokeFetcher jokeFetcher = new JokeFetcher(mockFactory, mockDateFormatter);
            Jokes jokes = jokeFetcher.getJokes(jokeTypes, timeZone);
            int tempCount = 1;
            for(Joke j : jokes.getJokes()){
-               assertEquals("Amazing Joke " + tempCount, j.toString());
+               assertEquals("Joke{joke=Amazing Joke " + tempCount + ", reference=www.fakeApi.com}", j.toString());
                tempCount++;
            }
     }

@@ -10,7 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DateFormatterTest {
-    
+
     @Test
     public void testGetFormattedDate() throws Exception {
         DateFormatter dateformatter = new DateFormatter();
